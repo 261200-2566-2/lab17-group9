@@ -11,14 +11,29 @@ export default function ChatBox() {
     const [typedMessage, setTypedMessage] = useState<string>("")
     const username = useAppSelector(selectUsername)
     const webSocketState = useAppSelector(selectWebSocket)
+
+    let count = 0 ;
     return (
         <>
             <div className="bg-white w-full rounded-lg shadow-lg p-4">
                 <div className="mb-4">
                     <h1 className="text-3xl font-extrabold text-gray-800">Group Chat</h1>
                     <p className="text-gray-600">Welcome to the chat room!</p>
+
+                    {webSocketState.messages?.map((message) => {
+                        if(
+                            message.type === messageType.JOIN ||
+                            message.type === messageType.LEAVE
+                        ){
+                            //count = message.PrevCount;
+                            count = message.prevOnline;
+                        }
+                        return <></>;
+                        
+                    })}
+
                     <p>
-                        Online persons : <strong>fix me pls</strong>
+                        Online persons : <strong>{count}</strong>
                     </p>
                 </div>
 
