@@ -18,6 +18,8 @@ public class chatController {
     @SendTo("/topic/public")
     public ChatMessage addUser(ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        ChatMessage.IncreaseCount();
+        chatMessage.setCount();
         return chatMessage;
     }
 }
